@@ -46,7 +46,7 @@ var config = {
     tunnel: true,
     host: 'localhost',
     port: 9000,
-    logPrefix: "Frontend_Devil"
+    logPrefix: "Frontend"
 };
 
 gulp.task('webserver', function () {
@@ -81,7 +81,11 @@ gulp.task('style:build', function () {
             sourceMap: true,
             errLogToConsole: true
         }))
-        .pipe(prefixer())
+        .pipe(prefixer(
+            {
+                browsers: ['last 3 versions', '> 1%'],
+                cascade: false
+            }))
         .pipe(cssclean())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.css))
